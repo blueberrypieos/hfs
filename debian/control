@@ -1,0 +1,27 @@
+Source: hfs
+Section: admin
+Priority: optional
+Maintainer: Maxwell <maxwell@blueberrypieos.com>
+Build-Depends: pietoolchain (>= 0.1.0)
+Standards-Version: 4.7.3
+Homepage: https://github.com/apple-oss-distributions/hfs
+Vcs-Git: https://github.com/blueberrypieos/hfs.git -b blueberry-pie-os/latest
+Vcs-Browser: https://github.com/blueberrypieos/hfs
+Rules-Requires-Root: no
+
+Package: hfs
+Architecture: darwin-arm64
+Essential: yes
+Priority: required
+Depends: libsystem, libutil
+Description: HFS+ tools (mount_hfs, newfs_hfs, fsck_hfs)
+ Tools to mount, create, check and repair HFS+ filesystems.
+ The filesystem kernel extension is built with the kernel.
+
+Package: hfs-dev
+Section: libdevel
+Priority: optional
+Architecture: darwin-arm64
+Depends: hfs (= ${binary:Version})
+Description: HFS+ filesystem development headers
+ Public HFS+ format, mount and Unicode headers for building userland tools.

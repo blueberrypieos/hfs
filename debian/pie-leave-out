@@ -1,0 +1,5 @@
+APPLE_LICENSE
+lib_fsck_hfs/check.h
+lib_fsck_hfs/lib_fsck_hfs.h
+lib_fsck_hfs/dfalib/DecompData.h
+lib_fsck_hfs/dfalib/DecompDataEnums.h
