@@ -119,13 +119,15 @@ Files: debian/*
 Copyright: 2026 The Blueberry Pie OS Authors
 License: BSD-2-Clause
 
-Files: debian/patches/*.patch
-Copyright: 1999-2023 Apple Inc.
- 1999-2023 Apple Computer, Inc.
+Files: debian/patches/0001-tools-without-CoreServices-and-DiskImages2.patch
+Copyright: 1984-2023 Apple Computer, Inc.
+ 1994 Christopher G. Demetriou
+ 1999-2024 Apple Inc.
  2026 The Blueberry Pie OS Authors
-License: APSL-2.0
+License: APSL-2.0 AND LicenseRef-BSD-4-Clause-Demetriou
 
 Files: debian/lib_fsck/check.c
+ debian/patches/0002-fsck_hfs-live-check-logging.patch
 Copyright: 1999-2000, 2002-2008 Apple Inc.
  1980, 1986, 1993 The Regents of the University of California
  2026 The Blueberry Pie OS Authors

@@ -1,0 +1,92 @@
+Description: Build the tools without CoreServices, DiskImages2 and the optical check
+ CoreServices and DiskImages2 are not available on PIE. newfs_hfs defines
+ the Finder flags and kTextEncodingMacUnicode itself. mount_hfs builds its
+ disk image code only with DiskImages2. A Pi has no optical media, so
+ mount_hfs leaves out the optical media check.
+Author: The Blueberry Pie OS Authors
+Forwarded: not-needed
+Last-Update: 2026-11-11
+
+--- a/mount_hfs/mount_hfs.c
++++ b/mount_hfs/mount_hfs.c
+@@ -20,6 +20,7 @@
+  * 
+  * @APPLE_LICENSE_HEADER_END@
+  */
++/* Modified 2026-11-11: the disk image code is built only with DiskImages2, and the optical media check is left out (APSL 2.0 section 2.2(b)). */
+ 
+ #include <sys/types.h>
+ 
+@@ -52,7 +53,9 @@
+ #include <hfs/hfs_format.h>
+ 
+ #include <IOKit/IOKitLib.h>
++#if __has_include(<DiskImages2/DICommon.h>)
+ #include <DiskImages2/DICommon.h>
++#endif
+ 
+ #include <TargetConditionals.h>
+ 
+@@ -69,9 +72,6 @@ struct hfs_backingstoreinfo {
+ 
+ /* Sensible wrappers over the byte-swapping routines */
+ #include "hfs_endian.h"
+-#if TARGET_OS_OSX  
+-#include "optical.h"  //only include optical headers on Macs
+-#endif //osx
+ 
+ #include <mntopts.h>
+ 
+@@ -725,6 +725,7 @@ main(argc, argv)
+ 		 * diskimage via DI2, we need to detect and issue
+ 		 * HFSIOC_SETBACKINGSTOREINFO.
+ 		 */
++#if __has_include(<DiskImages2/DICommon.h>)
+ 		if (dev) {
+ 			char *bname;
+ 			size_t pdevlen = strlen(_PATH_DEV);
+@@ -802,6 +803,7 @@ main(argc, argv)
+ 				}
+ 			}
+ 		}
++#endif
+ 	}
+ 
+ #if DEBUG
+@@ -817,17 +819,6 @@ main(argc, argv)
+ 
+ #endif
+ 
+-#if TARGET_OS_OSX
+-    /*
+-     * We shouldn't really be calling up to other layers, but
+-     * an exception was made in this case to fix the situation
+-     * where HFS was writable on optical media.
+-     */
+-    
+-    if ((_optical_is_writable(dev) & _OPTICAL_WRITABLE_PACKET)) {
+-	    mntflags |= MNT_RDONLY;
+-    }
+-#endif
+ 	
+     if (is_hfs_std)
+ 	    mntflags |= MNT_RDONLY;
+--- a/newfs_hfs/makehfs.c
++++ b/newfs_hfs/makehfs.c
+@@ -20,6 +20,7 @@
+  * 
+  * @APPLE_LICENSE_HEADER_END@
+  */
++/* Modified 2026-11-11: the Finder flags and kTextEncodingMacUnicode are defined here when CoreServices is missing (APSL 2.0 section 2.2(b)). */
+ /*
+ 	File:		makehfs.c
+ 
+@@ -51,7 +52,7 @@
+ 
+ #include <TargetConditionals.h>
+ 
+-#if TARGET_OS_IPHONE
++#if TARGET_OS_IPHONE || !__has_include(<CoreServices/CoreServices.h>)
+ 
+ // CoreServices is not available, so...
+ 

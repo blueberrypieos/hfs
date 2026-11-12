@@ -13,7 +13,7 @@ Package: hfs
 Architecture: darwin-arm64
 Essential: yes
 Priority: required
-Depends: libsystem, libutil
+Depends: corefoundation, iokit, libsystem, libutil
 Description: HFS+ tools (mount_hfs, newfs_hfs, fsck_hfs)
  Tools to mount, create, check and repair HFS+ filesystems.
  The filesystem kernel extension is built with the kernel.

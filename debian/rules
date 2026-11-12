@@ -11,7 +11,7 @@ mount_hfs_DIR := sbin
 mount_hfs_LIBS := -lutil
 newfs_hfs_SRCS := newfs_hfs/newfs_hfs.c newfs_hfs/makehfs.c newfs_hfs/hfs_endian.c
 newfs_hfs_DIR := sbin
-newfs_hfs_LIBS := -lutil
+newfs_hfs_LIBS := -lutil -framework CoreFoundation -framework IOKit
 FSCK_DFALIB := BlockCache BTree BTreeAllocate BTreeMiscOps BTreeNodeOps BTreeScanner \
 	BTreeTreeOps CatalogCheck dirhardlink HardLinkCheck hfs_endian SAllocate SBTree \
 	SCatalog SControl SDevice SExtents SKeyCompare SRebuildBTree SRepair SStubs SUtils \
@@ -24,7 +24,7 @@ fsck_hfs_SRCS := $(addprefix fsck_hfs/,fsck_hfs.c fsck_messages.c utilities.c) \
 fsck_hfs_DIR := sbin
 fsck_hfs_FLAGS := -DBSD=1 -DDEBUG_BUILD=0 -include stdarg.h -include unistd.h -fcommon \
 	-I$(SRCROOT)/debian/lib_fsck -I$(SRCROOT)/fsck_hfs -I$(SRCROOT)/lib_fsck_hfs
-fsck_hfs_LIBS := -lutil
+fsck_hfs_LIBS := -lutil -framework CoreFoundation -framework IOKit
 TOOLS_LDFLAGS := -Wl,-sectcreate,__TEXT,__source,$(NOTICE)
 
 

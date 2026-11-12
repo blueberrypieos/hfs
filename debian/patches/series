@@ -1,2 +1,2 @@
-0001-tools-without-CoreFoundation-and-IOKit.patch
+0001-tools-without-CoreServices-and-DiskImages2.patch
 0002-fsck_hfs-live-check-logging.patch

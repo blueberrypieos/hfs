@@ -1,3 +1,11 @@
+hfs (715.120.4+ds1-2) blueberry-pie-os; urgency=medium
+
+  * fsck_hfs opens an external journal by its UUID.
+  * newfs_hfs stores names in decomposed form.
+  * newfs_hfs finds the UUID of an external journal device.
+
+ -- Maxwell <maxwell@blueberrypieos.com>  Wed, 11 Nov 2026 12:00:00 +0000
+
 hfs (715.120.4+ds1-1) blueberry-pie-os; urgency=medium
 
   * HFS 715.120.4
