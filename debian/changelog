@@ -1,3 +1,9 @@
+hfs (715.120.4+ds1-3) blueberry-pie-os; urgency=medium
+
+  * Build-Depend on pietoolchain-host and pietoolchain-sdk.
+
+ -- Maxwell <maxwell@blueberrypieos.com>  Sun, 15 Nov 2026 08:53:32 +0000
+
 hfs (715.120.4+ds1-2) blueberry-pie-os; urgency=medium
 
   * fsck_hfs opens an external journal by its UUID.
